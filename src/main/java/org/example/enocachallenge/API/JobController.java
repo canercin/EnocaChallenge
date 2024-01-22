@@ -3,6 +3,8 @@ package org.example.enocachallenge.API;
 import org.example.enocachallenge.BusinessLayer.IJobService;
 import org.example.enocachallenge.Entities.Job;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,18 +26,21 @@ public class JobController {
     }
 
     @PostMapping("/insertJob")
-    public void insertJob(@RequestBody Job job){
+    public ResponseEntity<String> insertJob(@RequestBody Job job){
         this.jobService.insertJob(job);
+        return new ResponseEntity<>("Job added successfully", HttpStatus.OK);
     }
 
     @PostMapping("/updateJob")
-    public void updateJob(@RequestBody Job job){
+    public ResponseEntity<String> updateJob(@RequestBody Job job){
         this.jobService.updateJob(job);
+        return new ResponseEntity<>("Job updated successfully", HttpStatus.OK);
     }
 
     @PostMapping("/deleteJob")
-    public void deleteJob(@RequestBody Job job){
+    public ResponseEntity<String> deleteJob(@RequestBody Job job){
         this.jobService.deleteJob(job);
+        return new ResponseEntity<>("Job deleted successfully", HttpStatus.OK);
     }
 
     @GetMapping("/getJobByID/{jobID}")
